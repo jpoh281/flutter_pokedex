@@ -17,9 +17,15 @@ class HomeScreen extends StatelessWidget {
           children: [
             Text("Home Screen"),
             TextButton(
-                onPressed: context.read<PokemonCubit>().getPokemon,
-                child: Text("getPokemon()")),
+                onPressed: () => context.read<PokemonCubit>().getPokemonById(1),
+                child: Text("getPokemon(1)")),
+            TextButton(
+                onPressed: () => context.read<PokemonCubit>().getPokemonById(2),
+                child: Text("getPokemon(2)")),
             BlocBuilder<PokemonCubit, PokemonState>(builder: (context, state) {
+              if (state is PokemonLoadSuccess) {
+                return Text("Pokemon name: ${state.pokemon.name}");
+              }
               return Text(state.toString());
             })
           ],

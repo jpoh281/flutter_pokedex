@@ -6,5 +6,5 @@ class PokemonRepository {
 
   PokemonRepository(this._pokemonApi);
 
-  Future<Pokemon?> getPokemonById(int id) => _pokemonApi.getPokemonById(id);
+  Future<Pokemon> getPokemonById(int id) => _pokemonApi.getPokemonById(id);
 }
