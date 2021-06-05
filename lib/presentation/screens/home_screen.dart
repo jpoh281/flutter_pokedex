@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_pokedex/bloc/pokemon_cubit.dart';
-import 'package:flutter_pokedex/bloc/pokemon_state.dart';
+import 'package:flutter_pokedex/bloc/pokemon/pokemon_cubit.dart';
+import 'package:flutter_pokedex/bloc/pokemons/pokemons_cubit.dart';
+import 'package:flutter_pokedex/bloc/pokemons/pokemons_state.dart';
+import 'package:flutter_pokedex/presentation/widgets/pokemon_preview.dart';
 import 'package:provider/provider.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -9,27 +11,54 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    context.read<PokemonsCubit>().fetchPokemonList();
+
     return Scaffold(
-      body: Container(
-        child: Center(
-            child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text("Home Screen"),
-            TextButton(
-                onPressed: () => context.read<PokemonCubit>().getPokemonById(1),
-                child: Text("getPokemon(1)")),
-            TextButton(
-                onPressed: () => context.read<PokemonCubit>().getPokemonById(2),
-                child: Text("getPokemon(2)")),
-            BlocBuilder<PokemonCubit, PokemonState>(builder: (context, state) {
-              if (state is PokemonLoadSuccess) {
-                return Text("Pokemon name: ${state.pokemon.name}");
-              }
-              return Text(state.toString());
-            })
-          ],
-        )),
+      body: SingleChildScrollView(
+        physics: BouncingScrollPhysics(),
+        child: SafeArea(
+          child: Container(
+            margin: const EdgeInsets.all(16.0),
+            child: Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text("Pokedex", style: Theme.of(context).textTheme.headline2),
+                  SizedBox(
+                    height: 16.0,
+                  ),
+                  BlocBuilder<PokemonsCubit, PokemonsState>(
+                    builder: (context, state) {
+                      if (state is PokemonsLoadSuccess) {
+                        return GridView.builder(
+                          physics: NeverScrollableScrollPhysics(),
+                          shrinkWrap: true,
+                          gridDelegate:
+                              SliverGridDelegateWithFixedCrossAxisCount(
+                                  crossAxisSpacing: 16.0,
+                                  mainAxisSpacing: 16.0,
+                                  mainAxisExtent: 140,
+                                  crossAxisCount: 2),
+                          itemCount: state.pokemonList.length,
+                          itemBuilder: (context, index) =>
+                              BlocProvider<PokemonCubit>(
+                            create: (context) => PokemonCubit(),
+                            child: PokemonPreview(
+                              pokemonName: state.pokemonList[index],
+                            ),
+                          ),
+                        );
+                      }
+
+                      return Text(state.toString());
+                    },
+                  )
+                ],
+              ),
+            ),
+          ),
+        ),
       ),
     );
   }

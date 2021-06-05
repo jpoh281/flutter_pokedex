@@ -1,4 +1,4 @@
-import 'package:flutter_pokedex/data/data_providers/pokemon_api.dart';
+import 'package:flutter_pokedex/data/data_providers/api/pokemon_api.dart';
 import 'package:flutter_pokedex/data/repositories/pokemon_repository.dart';
 import 'package:get_it/get_it.dart';
 import 'package:http/http.dart' as http;

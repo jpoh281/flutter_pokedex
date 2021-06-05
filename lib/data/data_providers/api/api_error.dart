@@ -1,4 +1,4 @@
-import 'package:flutter_pokedex/data/data_providers/data_provider_error.dart';
+import 'package:flutter_pokedex/data/data_providers/common/data_provider_error.dart';
 
 class ApiError extends DataProviderError {
   ApiError({required int code, required String message})
