@@ -16,8 +16,12 @@ class MyApp extends StatelessWidget {
       title: "Flutter PokeDex",
       theme: ThemeData(
           fontFamily: "Google",
-          primarySwatch: Colors.blue,
+          primarySwatch: Colors.deepPurple,
           textTheme: TextTheme(
+              headline1: TextStyle(
+                  color: Colors.white,
+                  fontSize: 32,
+                  fontWeight: FontWeight.bold),
               headline2: TextStyle(
                   color: Color(0XFF303943),
                   fontSize: 28,

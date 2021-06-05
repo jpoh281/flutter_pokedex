@@ -9,7 +9,6 @@ class PokemonTypeBadge extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
         padding: const EdgeInsets.all(5.0),
-        margin: const EdgeInsets.only(bottom: 5.0),
         decoration: BoxDecoration(
           color: Colors.white24,
           borderRadius: BorderRadius.circular(10.0),

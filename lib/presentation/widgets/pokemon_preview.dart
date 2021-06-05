@@ -74,7 +74,10 @@ class PokemonPreview extends StatelessWidget {
                           height: 10.0,
                         ),
                         for (PokemonType pokemonType in state.pokemon.types)
-                          PokemonTypeBadge(name: pokemonType.type.name)
+                          Container(
+                              margin: const EdgeInsets.only(bottom: 5.0),
+                              child:
+                                  PokemonTypeBadge(name: pokemonType.type.name))
                       ],
                     ),
                   ),
