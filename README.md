@@ -1,6 +1,8 @@
 # Flutter PokéDex
 Simple PokéDex mobile application made in Flutter.
 
+![license](https://img.shields.io/github/license/pintalubaf/flutter_pokedex?style=flat)
+
 <p float="left">
 <img src="https://user-images.githubusercontent.com/36412259/120937885-70ab8a00-c6e6-11eb-957e-dfedfdf1dbeb.gif" width="250">
 <img src="https://user-images.githubusercontent.com/36412259/120937946-df88e300-c6e6-11eb-8ae3-c3c4ff6b4321.gif" width="250">
