@@ -1,6 +1,8 @@
+import 'package:flutter_pokedex/data/data_providers/api/pokemon_ability_api.dart';
 import 'package:flutter_pokedex/data/data_providers/api/pokemon_api.dart';
 import 'package:flutter_pokedex/data/data_providers/api/pokemon_evolution_chain_api.dart';
 import 'package:flutter_pokedex/data/data_providers/api/pokemon_species_api.dart';
+import 'package:flutter_pokedex/data/repositories/pokemon_ability_repository.dart';
 import 'package:flutter_pokedex/data/repositories/pokemon_evolution_chain_repository.dart';
 import 'package:flutter_pokedex/data/repositories/pokemon_repository.dart';
 import 'package:flutter_pokedex/data/repositories/pokemon_species_repository.dart';
@@ -26,4 +28,9 @@ void setupLocator() {
       PokemonEvolutionChainApi(GetIt.I<http.Client>()));
   GetIt.I.registerSingleton<PokemonEvolutionChainRepository>(
       PokemonEvolutionChainRepository(GetIt.I<PokemonEvolutionChainApi>()));
+
+  GetIt.I.registerSingleton<PokemonAbilityApi>(
+      PokemonAbilityApi(GetIt.I<http.Client>()));
+  GetIt.I.registerSingleton<PokemonAbilityRepository>(
+      PokemonAbilityRepository(GetIt.I<PokemonAbilityApi>()));
 }

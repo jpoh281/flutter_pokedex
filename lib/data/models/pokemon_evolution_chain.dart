@@ -1,3 +1,4 @@
+import 'package:flutter_pokedex/data/models/name_wrapper.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'pokemon_evolution_chain.g.dart';
@@ -18,7 +19,7 @@ class PokemonEvolutionChainWrapper {
 class PokemonEvolutionChain {
   final List<_EvolutionDetails> evolutionDetails;
   final List<PokemonEvolutionChain> evolvesTo;
-  final _PokemonSpecies species;
+  final NameWrapper species;
 
   PokemonEvolutionChain(
       {required this.evolutionDetails,
@@ -33,24 +34,12 @@ class PokemonEvolutionChain {
 
 @JsonSerializable()
 class _EvolutionDetails {
-  final int minLevel;
+  final int? minLevel;
 
-  _EvolutionDetails({required this.minLevel});
+  _EvolutionDetails({this.minLevel});
 
   factory _EvolutionDetails.fromJson(Map<String, dynamic> json) =>
       _$_EvolutionDetailsFromJson(json);
 
   Map<String, dynamic> toJson() => _$_EvolutionDetailsToJson(this);
-}
-
-@JsonSerializable()
-class _PokemonSpecies {
-  final String name;
-
-  _PokemonSpecies({required this.name});
-
-  factory _PokemonSpecies.fromJson(Map<String, dynamic> json) =>
-      _$_PokemonSpeciesFromJson(json);
-
-  Map<String, dynamic> toJson() => _$_PokemonSpeciesToJson(this);
 }

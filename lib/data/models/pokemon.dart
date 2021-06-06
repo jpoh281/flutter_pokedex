@@ -2,6 +2,7 @@ import 'package:flutter_pokedex/data/models/pokemon_ability.dart';
 import 'package:flutter_pokedex/data/models/pokemon_sprites.dart';
 import 'package:flutter_pokedex/data/models/pokemon_stat.dart';
 import 'package:flutter_pokedex/data/models/pokemon_type.dart';
+import 'package:flutter_pokedex/data/models/url_wrapper.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'pokemon.g.dart';
@@ -14,7 +15,7 @@ class Pokemon {
   final int id;
   final String locationAreaEncounters;
   final String name;
-  final _PokemonSpecie species;
+  final UrlWrapper species;
   final PokemonSprites sprites;
   final List<PokemonStat> stats;
   final List<PokemonType> types;
@@ -37,16 +38,4 @@ class Pokemon {
       _$PokemonFromJson(json);
 
   Map<String, dynamic> toJson() => _$PokemonToJson(this);
-}
-
-@JsonSerializable()
-class _PokemonSpecie {
-  final String url;
-
-  _PokemonSpecie({required this.url});
-
-  factory _PokemonSpecie.fromJson(Map<String, dynamic> json) =>
-      _$_PokemonSpecieFromJson(json);
-
-  Map<String, dynamic> toJson() => _$_PokemonSpecieToJson(this);
 }

@@ -16,7 +16,9 @@ class PokemonDetailAboutPage extends StatelessWidget {
         margin: const EdgeInsets.all(16.0),
         child: Column(
           children: [
-            Text(PokemonUtils.getFirstFlavorText(pokemonWrapper.pokemonSpecie),
+            Text(
+                PokemonUtils.getFirstFlavorText(
+                    pokemonWrapper.pokemonSpecie.flavorTextEntries),
                 textAlign: TextAlign.center),
             SizedBox(
               height: 20.0,

@@ -1,7 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_pokedex/data/models/flavor_text.dart';
 import 'package:flutter_pokedex/data/models/pokemon.dart';
-import 'package:flutter_pokedex/data/models/pokemon_specie.dart';
+import 'package:flutter_pokedex/data/models/pokemon_ability_detail.dart';
 
 class PokemonUtils {
   static Color mapTypeToColor(Pokemon pokemon) {
@@ -40,8 +41,16 @@ class PokemonUtils {
     return id.toString();
   }
 
-  static String getFirstFlavorText(PokemonSpecie pokemonSpecie) {
-    return pokemonSpecie.flavorTextEntries
+  static String getAbilityNameText(PokemonAbilityDetail pokemonAbilityDetail) {
+    return pokemonAbilityDetail.names
+        .firstWhere((flavorText) => flavorText.language.name == 'en')
+        .name
+        .replaceAll('\n', ' ')
+        .replaceAll('\f', ' ');
+  }
+
+  static String getFirstFlavorText(List<FlavorText> flavorTextList) {
+    return flavorTextList
         .firstWhere((flavorText) => flavorText.language.name == 'en')
         .flavorText
         .replaceAll('\n', ' ')

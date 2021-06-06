@@ -25,7 +25,7 @@ class PokemonDetailEvolutionPage extends StatelessWidget {
               height: 5.0,
             ),
             Text(
-              "min. level: ${evolutionChain.evolutionDetails[0].minLevel}",
+              "min. level: ${evolutionChain.evolutionDetails[0].minLevel ?? 'unknown'}",
               style: TextStyle(color: Colors.grey),
             )
           }

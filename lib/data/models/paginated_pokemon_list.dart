@@ -1,3 +1,4 @@
+import 'package:flutter_pokedex/data/models/name_wrapper.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'paginated_pokemon_list.g.dart';
@@ -7,7 +8,7 @@ class PaginatedPokemonList {
   final int count;
   final String? next;
   final String? previous;
-  final List<_PokemonName> results;
+  final List<NameWrapper> results;
 
   PaginatedPokemonList(
       {required this.count, this.next, this.previous, required this.results});
@@ -16,16 +17,4 @@ class PaginatedPokemonList {
       _$PaginatedPokemonListFromJson(json);
 
   Map<String, dynamic> toJson() => _$PaginatedPokemonListToJson(this);
-}
-
-@JsonSerializable()
-class _PokemonName {
-  final String name;
-
-  _PokemonName({required this.name});
-
-  factory _PokemonName.fromJson(Map<String, dynamic> json) =>
-      _$_PokemonNameFromJson(json);
-
-  Map<String, dynamic> toJson() => _$_PokemonNameToJson(this);
 }
