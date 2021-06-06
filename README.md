@@ -1,5 +1,5 @@
-# Flutter PokeDex
-Simple PokeDex mobile application made in Flutter.
+# Flutter PokéDex
+Simple PokéDex mobile application made in Flutter.
 
 <p float="left">
 <img src="https://user-images.githubusercontent.com/36412259/120937885-70ab8a00-c6e6-11eb-957e-dfedfdf1dbeb.gif" width="250">
