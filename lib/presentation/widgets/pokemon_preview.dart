@@ -4,6 +4,7 @@ import 'package:flutter_pokedex/bloc/pokemon/pokemon_cubit.dart';
 import 'package:flutter_pokedex/bloc/pokemon/pokemon_state.dart';
 import 'package:flutter_pokedex/bloc/pokemons/pokemons_state.dart';
 import 'package:flutter_pokedex/data/models/pokemon_type.dart';
+import 'package:flutter_pokedex/data/models/pokemon_wrapper.dart';
 import "package:flutter_pokedex/presentation/common/extensions.dart";
 import 'package:flutter_pokedex/presentation/common/image_assets.dart';
 import 'package:flutter_pokedex/presentation/common/pokemon_utils.dart';
@@ -27,8 +28,9 @@ class PokemonPreview extends StatelessWidget {
             ? () {
                 Navigator.of(context).push(
                   MaterialPageRoute(
-                    builder: (context) => Provider.value(
-                        value: state.pokemon, child: PokemonDetailScreen()),
+                    builder: (context) => Provider<PokemonWrapper>.value(
+                        value: state.pokemonWrapper,
+                        child: PokemonDetailScreen()),
                   ),
                 );
               }
@@ -36,7 +38,7 @@ class PokemonPreview extends StatelessWidget {
         child: Container(
           decoration: BoxDecoration(
             color: state is PokemonLoadSuccess
-                ? PokemonUtils.mapTypeToColor(state.pokemon)
+                ? PokemonUtils.mapTypeToColor(state.pokemonWrapper.pokemon)
                 : Colors.blueGrey.withOpacity(0.3),
             borderRadius: BorderRadius.circular(30.0),
           ),
@@ -67,13 +69,14 @@ class PokemonPreview extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          state.pokemon.name.capitalize(),
+                          state.pokemonWrapper.pokemon.name.capitalize(),
                           style: Theme.of(context).textTheme.headline3,
                         ),
                         SizedBox(
                           height: 10.0,
                         ),
-                        for (PokemonType pokemonType in state.pokemon.types)
+                        for (PokemonType pokemonType
+                            in state.pokemonWrapper.pokemon.types)
                           Container(
                               margin: const EdgeInsets.only(bottom: 5.0),
                               child:
@@ -88,12 +91,13 @@ class PokemonPreview extends StatelessWidget {
                       width: 65,
                       height: 100,
                       child: Hero(
-                        tag: state.pokemon.name,
+                        tag: state.pokemonWrapper.pokemon.name,
                         child: SvgPicture.network(
-                          state.pokemon.sprites.other.dreamWorld.frontDefault,
+                          state.pokemonWrapper.pokemon.sprites.other.dreamWorld
+                              .frontDefault,
                           fit: BoxFit.contain,
                           alignment: Alignment.bottomRight,
-                          semanticsLabel: state.pokemon.name,
+                          semanticsLabel: state.pokemonWrapper.pokemon.name,
                         ),
                       ),
                     ),

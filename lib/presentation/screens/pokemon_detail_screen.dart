@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_pokedex/data/models/pokemon.dart';
+import 'package:flutter_pokedex/data/models/pokemon_wrapper.dart';
 import "package:flutter_pokedex/presentation/common/extensions.dart";
 import 'package:flutter_pokedex/presentation/common/pokemon_utils.dart';
 import 'package:flutter_pokedex/presentation/pages/pokemon_detail_about_page.dart';
@@ -16,10 +16,10 @@ class PokemonDetailScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Pokemon pokemon = context.read<Pokemon>();
+    PokemonWrapper pokemonWrapper = context.read<PokemonWrapper>();
 
     return Scaffold(
-      backgroundColor: PokemonUtils.mapTypeToColor(pokemon),
+      backgroundColor: PokemonUtils.mapTypeToColor(pokemonWrapper.pokemon),
       body: SafeArea(
         child: DefaultTabController(
           length: 4,
@@ -45,7 +45,7 @@ class PokemonDetailScreen extends StatelessWidget {
                           ),
                         ),
                         Text(
-                          "#${PokemonUtils.formatId(pokemon.id)}",
+                          "#${PokemonUtils.formatId(pokemonWrapper.pokemon.id)}",
                           style: Theme.of(context).textTheme.headline3,
                         )
                       ],
@@ -54,14 +54,14 @@ class PokemonDetailScreen extends StatelessWidget {
                       height: 20,
                     ),
                     Text(
-                      pokemon.name.capitalize(),
+                      pokemonWrapper.pokemon.name.capitalize(),
                       style: Theme.of(context).textTheme.headline1,
                     ),
                     SizedBox(
                       height: 10.0,
                     ),
                     Row(
-                      children: pokemon.types
+                      children: pokemonWrapper.pokemon.types
                           .map((pokemonType) => Container(
                               margin: const EdgeInsets.only(right: 5.0),
                               child: PokemonTypeBadge(
@@ -129,12 +129,13 @@ class PokemonDetailScreen extends StatelessWidget {
                         alignment: Alignment.center,
                         height: 200,
                         child: Hero(
-                          tag: pokemon.name,
+                          tag: pokemonWrapper.pokemon.name,
                           child: SvgPicture.network(
-                            pokemon.sprites.other.dreamWorld.frontDefault,
+                            pokemonWrapper
+                                .pokemon.sprites.other.dreamWorld.frontDefault,
                             fit: BoxFit.contain,
                             alignment: Alignment.topCenter,
-                            semanticsLabel: pokemon.name,
+                            semanticsLabel: pokemonWrapper.pokemon.name,
                           ),
                         ),
                       ),

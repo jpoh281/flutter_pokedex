@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_pokedex/data/models/pokemon.dart';
+import 'package:flutter_pokedex/data/models/pokemon_specie.dart';
 
 class PokemonUtils {
   static Color mapTypeToColor(Pokemon pokemon) {
@@ -18,6 +19,7 @@ class PokemonUtils {
           return Color(0xffffce4b);
         case "poison":
           return Color(0xff7c538c);
+        case "bug":
         case "ground":
           return Color(0xffb1736c);
         default:
@@ -36,5 +38,13 @@ class PokemonUtils {
     }
 
     return id.toString();
+  }
+
+  static String getFirstFlavorText(PokemonSpecie pokemonSpecie) {
+    return pokemonSpecie.flavorTextEntries
+        .firstWhere((flavorText) => flavorText.language.name == 'en')
+        .flavorText
+        .replaceAll('\n', ' ')
+        .replaceAll('\f', ' ');
   }
 }

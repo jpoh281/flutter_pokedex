@@ -14,26 +14,24 @@ class HomeScreen extends StatelessWidget {
     context.read<PokemonsCubit>().fetchPokemonList();
 
     return Scaffold(
-      body: SingleChildScrollView(
-        physics: BouncingScrollPhysics(),
-        child: SafeArea(
-          child: Container(
-            margin: const EdgeInsets.all(16.0),
-            child: Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text("Pokedex", style: Theme.of(context).textTheme.headline2),
-                  SizedBox(
-                    height: 16.0,
-                  ),
-                  BlocBuilder<PokemonsCubit, PokemonsState>(
-                    builder: (context, state) {
-                      if (state is PokemonsLoadSuccess) {
-                        return GridView.builder(
-                          physics: NeverScrollableScrollPhysics(),
-                          shrinkWrap: true,
+      body: SafeArea(
+        child: Container(
+          margin: const EdgeInsets.fromLTRB(16.0, 16.0, 16.0, 0.0),
+          child: Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text("Pokedex", style: Theme.of(context).textTheme.headline2),
+                SizedBox(
+                  height: 16.0,
+                ),
+                BlocBuilder<PokemonsCubit, PokemonsState>(
+                  builder: (context, state) {
+                    if (state is PokemonsLoadSuccess) {
+                      return Expanded(
+                        child: GridView.builder(
+                          physics: BouncingScrollPhysics(),
                           gridDelegate:
                               SliverGridDelegateWithFixedCrossAxisCount(
                                   crossAxisSpacing: 16.0,
@@ -48,14 +46,18 @@ class HomeScreen extends StatelessWidget {
                               pokemonName: state.pokemonList[index],
                             ),
                           ),
-                        );
-                      }
+                        ),
+                      );
+                    }
 
-                      return Text(state.toString());
-                    },
-                  )
-                ],
-              ),
+                    if (state is PokemonsLoadInProgress) {
+                      return CircularProgressIndicator();
+                    }
+
+                    return Text(state.toString());
+                  },
+                )
+              ],
             ),
           ),
         ),

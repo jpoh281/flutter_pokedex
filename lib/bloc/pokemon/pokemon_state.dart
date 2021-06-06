@@ -1,6 +1,6 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_pokedex/data/models/pokemon.dart';
+import 'package:flutter_pokedex/data/models/pokemon_wrapper.dart';
 
 @immutable
 abstract class PokemonState extends Equatable {}
@@ -11,12 +11,12 @@ class PokemonInitial extends PokemonState {
 }
 
 class PokemonLoadSuccess extends PokemonState {
-  final Pokemon pokemon;
+  final PokemonWrapper pokemonWrapper;
 
-  PokemonLoadSuccess({required this.pokemon});
+  PokemonLoadSuccess({required this.pokemonWrapper});
 
   @override
-  List<Object?> get props => [pokemon];
+  List<Object?> get props => [pokemonWrapper];
 }
 
 class PokemonLoadFailed extends PokemonState {

@@ -6,10 +6,10 @@ import 'package:flutter_pokedex/data/models/pokemon.dart';
 import 'package:http/http.dart' as http;
 
 class PokemonApi {
-  final String _baseUrl = "https://pokeapi.co/api/v2";
+  final String _baseUrl;
   final http.Client _httpClient;
 
-  PokemonApi(this._httpClient);
+  PokemonApi(this._httpClient, this._baseUrl);
 
   Future<Pokemon> getPokemonById(int id) async {
     http.Response response =

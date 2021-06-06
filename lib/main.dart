@@ -30,6 +30,10 @@ class MyApp extends StatelessWidget {
                   color: Colors.white,
                   fontSize: 18,
                   fontWeight: FontWeight.bold),
+              headline4: TextStyle(
+                  color: Colors.grey,
+                  fontSize: 15,
+                  fontWeight: FontWeight.bold),
               bodyText1: TextStyle(color: Colors.white),
               bodyText2: TextStyle(color: Color(0XFF303943)))),
       home: BlocProvider(

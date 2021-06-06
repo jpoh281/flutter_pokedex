@@ -14,6 +14,7 @@ class Pokemon {
   final int id;
   final String locationAreaEncounters;
   final String name;
+  final _PokemonSpecie species;
   final PokemonSprites sprites;
   final List<PokemonStat> stats;
   final List<PokemonType> types;
@@ -26,6 +27,7 @@ class Pokemon {
       required this.id,
       required this.locationAreaEncounters,
       required this.name,
+      required this.species,
       required this.sprites,
       required this.stats,
       required this.types,
@@ -35,4 +37,16 @@ class Pokemon {
       _$PokemonFromJson(json);
 
   Map<String, dynamic> toJson() => _$PokemonToJson(this);
+}
+
+@JsonSerializable()
+class _PokemonSpecie {
+  final String url;
+
+  _PokemonSpecie({required this.url});
+
+  factory _PokemonSpecie.fromJson(Map<String, dynamic> json) =>
+      _$_PokemonSpecieFromJson(json);
+
+  Map<String, dynamic> toJson() => _$_PokemonSpecieToJson(this);
 }
